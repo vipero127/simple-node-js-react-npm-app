@@ -1,15 +1,10 @@
-pipeline {
-    agent {
-        docker {
-            image 'node:13.10.1' 
-            args '-p 3000:3000' 
-        }
+node {
+  try {
+    stage('Checkout') {
+      checkout scm
     }
-    stages {
-        stage('Build') { 
-            steps {
-                sh 'npm install' 
-            }
-        }
-    }
+  }
+  catch (err) {
+    throw err
+  }
 }
